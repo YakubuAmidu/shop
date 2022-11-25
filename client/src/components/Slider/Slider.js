@@ -26,7 +26,8 @@ const Container = styled.div`
 const Arrow = styled.div`
   width: 50px;
   height: 50px;
-  background-color: var(--color-light-gold-2);
+  background-color: #7d6608;
+  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
