@@ -8,6 +8,11 @@ import Footer from "../../components/Footer/Footer";
 import styled from "styled-components";
 import { Mobile } from "../../Responsive/Responsive";
 
+/*USE-LOCATION*/
+import { useLocation } from 'react-router-dom';
+
+import { useEffect, useState } from 'react';
+
 /*MATERIAL-ICONS*/
 import Remove from "@mui/icons-material/Remove";
 import Add from "@mui/icons-material/Add";
@@ -144,6 +149,9 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
   return (
     <Container>
       <Navbar />
