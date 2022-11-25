@@ -3,6 +3,7 @@ import React from "react";
 import Slider from "../../components/Slider/Slider";
 import Announcement from "../../components/Announcement/Announcement";
 import Categories from "../../components/Categories/Categories";
+import Products from "../../components/Products/Products";
 import NewsLetter from "../../components/NewsLetter/NewsLetter";
 import Footer from "../../components/Footer/Footer";
 
@@ -12,6 +13,7 @@ const Home = () => {
       <Announcement />
       <Slider />
       <Categories />
+      <Products />
       <NewsLetter />
       <Footer />
     </div>
