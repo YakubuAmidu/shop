@@ -174,28 +174,30 @@ const Product = () => {
           <Image src={product.img} />
         </ImageContainer>
         <InfoContainer>
-          <Title>Denim jumpsuit</Title>
+          <Title>{product.title}</Title>
           <Desc>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has
+           {
+            product.desc
+           }
           </Desc>
-          <Price>Price: $20</Price>
+          <Price>$ {product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Colors</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
+              {
+                product.color.map((c) => (
+                  <FilterColor color={c} key={c} />
+                ))
+              }
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>MD</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+                {
+                  product.size.map((s) => (
+                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  ))
+                }
               </FilterSize>
             </Filter>
           </FilterContainer>
