@@ -37,16 +37,19 @@ export const categories = [
     id: 1,
     img: "https://5.imimg.com/data5/QB/RC/MY-12566067/men-27s-branded-original-shirts-250x250.jpg",
     title: "SHIRT-STYLE",
+    cat: "Woman",
   },
   {
     id: 2,
     img: "https://5.imimg.com/data5/QB/RC/MY-12566067/men-27s-branded-original-shirts-250x250.jpg",
     title: "LONGWEAR LOVE",
+    cat: "Coat",
   },
   {
     id: 3,
     img: "https://5.imimg.com/data5/QB/RC/MY-12566067/men-27s-branded-original-shirts-250x250.jpg",
     title: "JACKET",
+    cat: "Jeans",
   },
 ];
 
