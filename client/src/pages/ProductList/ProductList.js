@@ -73,10 +73,6 @@ const ProductList = () => {
     });
   };
 
-  const handleSort = (e) => {
-    setSort(e.target.value);
-  };
-
   return (
     <Container>
       <Navbar />
@@ -105,7 +101,7 @@ const ProductList = () => {
         </Filter>
         <Filter>
           <FilterText>Sort products: </FilterText>
-          <Select onChange={handleSort}>
+          <Select onChange={(e) => setSort(e.target.value)}>
             <Option value="newest">Newest</Option>
             <Option value="asc">Price (asc)</Option>
             <Option value="des">Price (des)</Option>
