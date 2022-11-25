@@ -13,6 +13,8 @@ import { useLocation } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 
+import { publicRequest } from '../../RequestMethods/RequestMethods';
+
 /*MATERIAL-ICONS*/
 import Remove from "@mui/icons-material/Remove";
 import Add from "@mui/icons-material/Add";
@@ -151,6 +153,17 @@ const Button = styled.button`
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      } catch(err){}
+    }
+    getProduct();
+  }, [id])
 
   return (
     <Container>
@@ -158,7 +171,7 @@ const Product = () => {
       <Announcement />
       <Wrapper>
         <ImageContainer>
-          <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJjMKPmbhk96hzTwbAkzUlXE-Re1kyYGVqYg&usqp=CAU" />
+          <Image src={product.img} />
         </ImageContainer>
         <InfoContainer>
           <Title>Denim jumpsuit</Title>
