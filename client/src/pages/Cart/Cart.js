@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 /*IMPORTED-COMPONENTS*/
 import Announcement from "../../components/Announcement/Announcement";
 import Navbar from "../../components/Navbar/Navbar";
@@ -8,9 +10,16 @@ import Footer from "../../components/Footer/Footer";
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
 
+import { useSelector } from "react-redux";
+
 /*STYLED-COMPONENTS*/
 import styled from "styled-components";
 import { Mobile } from "../../Responsive/Responsive";
+
+/*REACT-STRIPE-CHECKOUT*/
+import StripeCheckout from "react-stripe-checkout";
+
+const KEY = process.env.R_STRIPE_KEY;
 
 const Container = styled.div``;
 
@@ -213,6 +222,14 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  console.log(stripeToken);
   return (
     <Container>
       <Navbar />
@@ -229,63 +246,41 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://ae01.alicdn.com/kf/HTB1htB.aKL2gK0jSZFmq6A7iXXaf/MANTLCONX-Newest-Solid-Autumn-Mens-Jackets-Male-Casual-Zipper-Summer-Jacket-Men-Spring-Casual-Outwear-Men.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product: </b> JESSIE THUNDERR SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b> 999000388383
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size: </b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>Price: $ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://cdn.shopify.com/s/files/1/1025/3059/products/NAVY_BLUE_SUIT__075_0ba78598-6c22-4024-820e-019a5fdb109a_830x1230_crop_center.jpg?v=1643118883" />
-                <Details>
-                  <ProductName>
-                    <b>Product: </b> CLASSIC MENS KUMASI SUIT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b> 999000388383
-                  </ProductId>
-                  <ProductColor color="darkblue" />
-                  <ProductSize>
-                    <b>Size: </b> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>Price: $ 100</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((product) => (
+              <Product>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product: </b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID: </b> {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size: </b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    Price: $ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <Hr />
             <SummaryItem>
@@ -300,9 +295,20 @@ const Cart = () => {
             <Hr />
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 85</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckout
+              name="Yakubu shop"
+              image="https://avatars.githubusercontent.com/u/43835383?v=4"
+              billingAddress
+              shippingAddress
+              description={`Your total is $ ${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>

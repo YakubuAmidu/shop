@@ -103,7 +103,6 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
-  console.log(quantity);
 
   return (
     <Container>
@@ -114,7 +113,7 @@ const Navbar = () => {
             <Input placeholder="Search..." />
             <Search
               style={{
-                color: "var(--color-light-gray-2)",
+                color: "lightgray",
                 fontSize: 16,
               }}
             />
