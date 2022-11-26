@@ -6,6 +6,7 @@ import Home from "../src/pages/Home/Home";
 import ProductList from "../src/pages/ProductList/ProductList";
 import Product from "../src/pages/Product/Product";
 import Cart from "../src/pages/Cart/Cart";
+import Success from "../src/pages/Success/Success";
 import Login from "../src/pages/Login/Login";
 import Register from "../src/pages/Register/Register";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/success" element={<Success />} />
         <Route
           path="/login"
           element={user ? <Navigate replace to="/" /> : <Login />}
