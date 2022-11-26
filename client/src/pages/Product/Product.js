@@ -19,6 +19,10 @@ import { publicRequest } from "../../RequestMethods/RequestMethods";
 import Remove from "@mui/icons-material/Remove";
 import Add from "@mui/icons-material/Add";
 
+/*IMPORTED-COMPONENTS*/
+import { addProduct } from "../../Redux/CartRedux";
+import { useDispatch } from "react-redux";
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -157,6 +161,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -178,6 +183,7 @@ const Product = () => {
 
   const handleClick = () => {
     //Update cart
+    dispatch(addProduct({ ...product, color, quantity, size }));
   };
 
   return (
