@@ -11,7 +11,7 @@ import Login from "../src/pages/Login/Login";
 import Register from "../src/pages/Register/Register";
 
 function App() {
-  const user = true;
+  const user = false;
 
   return (
     <BrowserRouter>
