@@ -1,6 +1,9 @@
 /*REACT-ROUTER-DOM*/
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+/*USESELECTOR*/
+import { useSelector } from "react-redux";
+
 /*IMPORTED-COMPONENTS*/
 import Home from "../src/pages/Home/Home";
 import ProductList from "../src/pages/ProductList/ProductList";
@@ -11,7 +14,7 @@ import Login from "../src/pages/Login/Login";
 import Register from "../src/pages/Register/Register";
 
 function App() {
-  const user = false;
+  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <BrowserRouter>

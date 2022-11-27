@@ -61,7 +61,7 @@ const Button = styled.button`
 
   &:disabled {
     color: red;
-    cursor: nont-allowed;
+    cursor: not-allowed;
   }
 `;
 
@@ -70,6 +70,11 @@ const Link = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+`;
+
+const Error = styled.span`
+  color: red;
+  margin-bottom: 10px;
 `;
 
 const Login = () => {
@@ -100,6 +105,7 @@ const Login = () => {
           <Button onClick={handleClick} disabled={isFetching}>
             SIGN IN
           </Button>
+          {error && <Error>Something went wrong...</Error>}
           <Link>DO YOU REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>
